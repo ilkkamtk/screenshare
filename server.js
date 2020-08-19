@@ -6,14 +6,12 @@ const io = require('socket.io')(http);
 io.on('connection', (socket) => {
   console.log('user connected');
 
-  socket.on('initiate', () => {
-    console.log('initiate received');
-    io.emit('initiate');
+  socket.on('startConnection', () => {
+    socket.broadcast.emit('startConnection');
   });
 
-  socket.on('offer', (data) => {
-    console.log('offer recieved');
-    socket.broadcast.emit('offer', data);
+  socket.on('signal', (data) => {
+    socket.broadcast.emit('signal', data);
   });
 
 });
